@@ -64,7 +64,6 @@ pod install
 
 **HealthKit Setup & Info.plist Configuration**
 
-
 Add these keys to Info.plist
 
 ```swift
@@ -125,7 +124,7 @@ func application(...) -> Bool {
 ```
 
 The SDK includes a ready‑made view controller YuvitalLifeSdkViewController that hosts the YuvitalLifeNativeSdk screen.
-Push the wrapper that hosts the SDK screen from any screen with a button:
+Push the wrapper that hosts the SDK from any screen:
 
 ```swift
 import YuvitalLifeSDK

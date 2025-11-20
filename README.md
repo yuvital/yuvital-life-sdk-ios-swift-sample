@@ -120,43 +120,89 @@ func application(...) -> Bool {
 }
 ```
 
-Push onto a navigation stack:
+This sample uses a wrapper view controller (`YuvitalLifeSdkViewController`) that embeds
+`ReactNativeViewController` as a child, hides the navigation bar while the SDK screen
+is visible, and temporarily takes over the interactive swipe‑back gesture so users can
+still swipe to go back. You can see the full implementation in the sample project at
+`Yuvital Life SDK Sample/YuvitalLifeSdkViewController.swift`.
+
+Create a wrapper that hosts the SDK screen:
 
 ```swift
-import YuvitalLifeSDK
+import UIKit
 import ReactBrownfield
+import YuvitalLifeSDK
 
-// Button example
-@IBAction func openSdkTapped(_ sender: Any) {
-    // Safe to call; only the first call starts the runtime
-    ReactNativeBrownfield.shared.startReactNative()
+final class YuvitalLifeSdkViewController: UIViewController, UIGestureRecognizerDelegate {
 
-    let vc = ReactNativeViewController(moduleName: "YuvitalLifeNativeSdk")
-    
-    // Optional: hide the navigation bar so the SDK screen appears full-screen
-    navigationController?.setNavigationBarHidden(true, animated: true)
+  private weak var previousPopDelegate: UIGestureRecognizerDelegate?
+  private var previousNavBarHidden: Bool = false
 
-    navigationController?.pushViewController(vc, animated: true)
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    let sdkVC = ReactNativeViewController(moduleName: "YuvitalLifeNativeSdk")
+
+    addChild(sdkVC)
+    view.addSubview(sdkVC.view)
+    sdkVC.view.translatesAutoresizingMaskIntoConstraints = false
+
+    NSLayoutConstraint.activate([
+      sdkVC.view.topAnchor.constraint(equalTo: view.topAnchor),
+      sdkVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      sdkVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      sdkVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+    ])
+
+    sdkVC.didMove(toParent: self)
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    if let nav = navigationController {
+      previousNavBarHidden = nav.isNavigationBarHidden
+      nav.setNavigationBarHidden(true, animated: animated)
+    }
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
+    guard let nav = navigationController,
+      let gesture = nav.interactivePopGestureRecognizer
+    else { return }
+
+    previousPopDelegate = gesture.delegate
+    gesture.delegate = self
+    gesture.isEnabled = true
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+
+    if let nav = navigationController {
+      nav.setNavigationBarHidden(previousNavBarHidden, animated: animated)
+    }
+
+    if let nav = navigationController,
+      let gesture = nav.interactivePopGestureRecognizer
+    {
+      gesture.delegate = previousPopDelegate
+    }
+  }
+
+  func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    return navigationController?.viewControllers.count ?? 0 > 1
+  }
 }
 ```
 
-### Optional: Enable swipe‑back when the navigation bar is hidden
-
-If your app hides the `UINavigationBar` (for a full‑screen look) but still wants the system
-swipe‑back gesture, set the navigation controller as the delegate of its interactive
-pop gesture and allow the gesture only when there is something to pop:
-This keeps the SDK full‑screen while preserving the native edge-swipe back behavior.
+Push the wrapper from any screen with a button:
 
 ```swift
-// In AppDelegate (after creating the navigation controller)
-let navigationController = UINavigationController(rootViewController: rootViewController)
-navigationController.interactivePopGestureRecognizer?.delegate = navigationController
-
-// Gesture delegate implementation
-extension UINavigationController: UIGestureRecognizerDelegate {
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        // Allow swipe-back only if there is more than one view controller on the stack
-        return viewControllers.count > 1
-    }
+func openSdkTapped() {
+    let sdkWrapper = YuvitalLifeSdkViewController()
+    navigationController?.pushViewController(sdkWrapper, animated: true)
 }
 ```

@@ -72,6 +72,10 @@ Add these keys to Info.plist
 <string>We want access to your health data so we can help you track your achievements and reach your goals</string>
 <key>NSHealthUpdateUsageDescription</key>
 <string>We want access to your health data so we can help you track your achievements and reach your goals</string>
+<key>NSCameraUsageDescription</key>
+<string>This app uses the camera to take photos for certain features.</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>This app uses the photo gallery to use images for certain features.</string>
 <key>UIViewControllerBasedStatusBarAppearance</key>
 <false/>
 ```

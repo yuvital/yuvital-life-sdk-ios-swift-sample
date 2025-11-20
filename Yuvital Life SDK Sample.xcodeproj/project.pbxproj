@@ -344,9 +344,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Yuvital-Life-SDK-Sample-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to take photos for certain features.";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We want access to your health data so we can help you track your achievements and reach your goals";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We want access to your health data so we can help you track your achievements and reach your goals";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app uses the photo gallery to use images for certain features.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -378,9 +379,10 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Yuvital-Life-SDK-Sample-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to take photos for certain features.";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We want access to your health data so we can help you track your achievements and reach your goals";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We want access to your health data so we can help you track your achievements and reach your goals";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app uses the photo gallery to use images for certain features.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

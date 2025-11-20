@@ -120,11 +120,7 @@ func application(...) -> Bool {
 }
 ```
 
-This sample uses a wrapper view controller (`YuvitalLifeSdkViewController`) that embeds
-`ReactNativeViewController` as a child, hides the navigation bar while the SDK screen
-is visible, and temporarily takes over the interactive swipe‑back gesture so users can
-still swipe to go back. You can see the full implementation in the sample project at
-`Yuvital Life SDK Sample/YuvitalLifeSdkViewController.swift`.
+The following example shows a wrapper view controller (YuvitalLifeSdkViewController) that embeds ReactNativeViewController as a child, hides the navigation bar while the SDK screen is visible, and temporarily takes over the interactive swipe‑back gesture so users can still swipe to go back.
 
 Create a wrapper that hosts the SDK screen:
 

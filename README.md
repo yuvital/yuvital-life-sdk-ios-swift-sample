@@ -132,6 +132,31 @@ import ReactBrownfield
     ReactNativeBrownfield.shared.startReactNative()
 
     let vc = ReactNativeViewController(moduleName: "YuvitalLifeNativeSdk")
+    
+    // Optional: hide the navigation bar so the SDK screen appears full-screen
+    navigationController?.setNavigationBarHidden(true, animated: true)
+
     navigationController?.pushViewController(vc, animated: true)
+}
+```
+
+### Optional: Enable swipe‑back when the navigation bar is hidden
+
+If your app hides the `UINavigationBar` (for a full‑screen look) but still wants the system
+swipe‑back gesture, set the navigation controller as the delegate of its interactive
+pop gesture and allow the gesture only when there is something to pop:
+This keeps the SDK full‑screen while preserving the native edge-swipe back behavior.
+
+```swift
+// In AppDelegate (after creating the navigation controller)
+let navigationController = UINavigationController(rootViewController: rootViewController)
+navigationController.interactivePopGestureRecognizer?.delegate = navigationController
+
+// Gesture delegate implementation
+extension UINavigationController: UIGestureRecognizerDelegate {
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Allow swipe-back only if there is more than one view controller on the stack
+        return viewControllers.count > 1
+    }
 }
 ```

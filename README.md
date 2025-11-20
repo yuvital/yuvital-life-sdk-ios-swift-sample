@@ -1,4 +1,4 @@
-# YuviTal Life SDK - Android (Swift) Sample Integration Guide
+# YuviTal Life SDK - iOS (Swift) Sample Integration Guide
 
 This repository contains an **iOS Swift sample application** that demonstrates how to integrate the YuviTal Life SDK into a native iOS app.
 
@@ -124,83 +124,12 @@ func application(...) -> Bool {
 }
 ```
 
-The following example shows a wrapper view controller (YuvitalLifeSdkViewController) that embeds ReactNativeViewController as a child, hides the navigation bar while the SDK screen is visible, and temporarily takes over the interactive swipe‑back gesture so users can still swipe to go back.
-
-Create a wrapper that hosts the SDK screen:
+The SDK includes a ready‑made view controller YuvitalLifeSdkViewController that hosts the YuvitalLifeNativeSdk screen.
+Push the wrapper that hosts the SDK screen from any screen with a button:
 
 ```swift
-import UIKit
-import ReactBrownfield
 import YuvitalLifeSDK
 
-final class YuvitalLifeSdkViewController: UIViewController, UIGestureRecognizerDelegate {
-
-  private weak var previousPopDelegate: UIGestureRecognizerDelegate?
-  private var previousNavBarHidden: Bool = false
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    let sdkVC = ReactNativeViewController(moduleName: "YuvitalLifeNativeSdk")
-
-    addChild(sdkVC)
-    view.addSubview(sdkVC.view)
-    sdkVC.view.translatesAutoresizingMaskIntoConstraints = false
-
-    NSLayoutConstraint.activate([
-      sdkVC.view.topAnchor.constraint(equalTo: view.topAnchor),
-      sdkVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      sdkVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      sdkVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-    ])
-
-    sdkVC.didMove(toParent: self)
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-
-    if let nav = navigationController {
-      previousNavBarHidden = nav.isNavigationBarHidden
-      nav.setNavigationBarHidden(true, animated: animated)
-    }
-  }
-
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-
-    guard let nav = navigationController,
-      let gesture = nav.interactivePopGestureRecognizer
-    else { return }
-
-    previousPopDelegate = gesture.delegate
-    gesture.delegate = self
-    gesture.isEnabled = true
-  }
-
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-
-    if let nav = navigationController {
-      nav.setNavigationBarHidden(previousNavBarHidden, animated: animated)
-    }
-
-    if let nav = navigationController,
-      let gesture = nav.interactivePopGestureRecognizer
-    {
-      gesture.delegate = previousPopDelegate
-    }
-  }
-
-  func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-    return navigationController?.viewControllers.count ?? 0 > 1
-  }
-}
-```
-
-Push the wrapper from any screen with a button:
-
-```swift
 func openSdkTapped() {
     let sdkWrapper = YuvitalLifeSdkViewController()
     navigationController?.pushViewController(sdkWrapper, animated: true)

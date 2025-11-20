@@ -1,6 +1,5 @@
 import UIKit
 import ReactBrownfield
-import YuvitalLifeSDK
 
 final class YuvitalLifeSdkViewController: UIViewController, UIGestureRecognizerDelegate {
 

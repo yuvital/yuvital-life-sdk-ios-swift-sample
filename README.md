@@ -40,8 +40,6 @@ pod init
 Add this to your `Podfile`:
 ```ruby
 source 'https://cdn.cocoapods.org/'
-# Staging yuvital-life-sdk-staging
-# Production yuvital-life-sdk-production
 source "https://dl.cloudsmith.io/basic/yuvital/yuvital-life-sdk-production/cocoapods/index.git"
 
 target '<YOUR_TARGET>' do

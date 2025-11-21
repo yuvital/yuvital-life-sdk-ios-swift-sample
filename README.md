@@ -29,7 +29,7 @@ This is required so tools like CocoaPods will use the credentials in `.netrc`.
 
 **Add to Podfile**
 
-If your project doesn’t have a `Podfile` yet, create one in your Xcode project directory:
+If your project doesn’t have a `Podfile` yet, create one in your Xcode project directory (make sure CocoaPods is already installed):
 ```ruby
 cd <PATH_TO_YOUR_XCODE_PROJECT>
 pod init

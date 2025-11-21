@@ -1,4 +1,6 @@
 import UIKit
+import YuvitalLifeSDK
+import ReactBrownfield
 
 private struct YuvitalCardConfig {
   let title: String
@@ -39,7 +41,7 @@ final class RootViewController: UIViewController {
         imageName: "yuvital_life",
         isPrimary: true,
         action: { [weak self] in
-          self?.openSdkTapped()
+          self?.openYuvitalLifeSdkTapped()
         }
       ),
       YuvitalCardConfig(
@@ -85,8 +87,9 @@ final class RootViewController: UIViewController {
     ])
   }
 
-  private func openSdkTapped() {
-    let sdkWrapper = YuvitalLifeSdkViewController()
+  private func openYuvitalLifeSdkTapped() {
+    let rnVC = ReactNativeViewController(moduleName: "YuvitalLifeNativeSdk")
+    let sdkWrapper = YuvitalLifeSdkViewController(embeddedViewController: rnVC)
     navigationController?.pushViewController(sdkWrapper, animated: true)
   }
 }

@@ -93,7 +93,7 @@ In **Signing & Capabilities** for your target, add **HealthKit**:
 
 **User Script Sandboxing**
 
-Xcode 15 enables User Script Sandboxing by default, which can block CocoaPods’ standard [CP] Embed Pods Frameworks script from copying the SDK’s frameworks, causing Operation not permitted build errors. To allow the SDK to be embedded correctly, you need to disable this sandboxing for your app target.
+Xcode enables User Script Sandboxing by default, which can block CocoaPods’ standard [CP] Embed Pods Frameworks script from copying the SDK’s frameworks, causing Operation not permitted build errors. To allow the SDK to be embedded correctly, you need to disable this sandboxing for your app target.
 
 - In Xcode, select your app target.
 - Open the **Build Settings** tab.
@@ -126,9 +126,11 @@ Push the wrapper that hosts the SDK from any screen:
 
 ```swift
 import YuvitalLifeSDK
+import ReactBrownfield
 
-func openSdkTapped() {
-    let sdkWrapper = YuvitalLifeSdkViewController()
+func openYuvitalLifeSdkTapped() {
+    let rnVC = ReactNativeViewController(moduleName: "YuvitalLifeNativeSdk")
+    let sdkWrapper = YuvitalLifeSdkViewController(embeddedViewController: rnVC)
     navigationController?.pushViewController(sdkWrapper, animated: true)
 }
 ```

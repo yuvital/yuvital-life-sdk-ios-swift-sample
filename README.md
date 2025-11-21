@@ -14,8 +14,6 @@ This SDK is designed exclusively for **native mobile applications** developed us
 
 -   **Target OS:** iOS 15.5+
 
--   **iOS**
-
 **Add Cloudsmith CocoaPods token to .netrc**
 
 ```swift

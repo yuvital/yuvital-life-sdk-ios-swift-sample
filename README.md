@@ -58,6 +58,9 @@ Install the dependencies:
 pod install
 ```
 
+After running `pod install`, **always open the generated `.xcworkspace` file in Xcode** (not the `.xcodeproj`).  
+If you see build errors about missing pods or modules, make sure you opened the `.xcworkspace`.
+
 **HealthKit Setup & Info.plist Configuration**
 
 Add these keys to Info.plist

@@ -43,7 +43,7 @@ source "https://dl.cloudsmith.io/basic/yuvital/yuvital-life-sdk-production/cocoa
 target '<YOUR_TARGET>' do
     use_frameworks!
 
-    pod 'YuvitalLifeSDK', '1.1.6'
+    pod 'YuvitalLifeSDK', '2.1.1'
 end
 ```
 

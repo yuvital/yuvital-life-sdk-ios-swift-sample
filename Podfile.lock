@@ -1,16 +1,16 @@
 PODS:
-  - YuvitalLifeSDK (1.1.6)
+  - YuvitalLifeSDK (2.1.1)
 
 DEPENDENCIES:
-  - YuvitalLifeSDK (= 1.1.6)
+  - YuvitalLifeSDK (= 2.1.1)
 
 SPEC REPOS:
   https://dl.cloudsmith.io/basic/yuvital/yuvital-life-sdk-production/cocoapods/index.git:
     - YuvitalLifeSDK
 
 SPEC CHECKSUMS:
-  YuvitalLifeSDK: bc56ce7969c69755a0f143a80fd311b01b05cffc
+  YuvitalLifeSDK: f69cf2389e3dbbc642b45f010914a994fc2859e4
 
-PODFILE CHECKSUM: e4e340c136d89a7597ccece153e048fd3824eb55
+PODFILE CHECKSUM: 5f11c736b94a3186d67396ba9347b931c91851fc
 
 COCOAPODS: 1.15.2

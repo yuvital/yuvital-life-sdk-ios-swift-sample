@@ -90,6 +90,8 @@ In **Signing & Capabilities** for your target, add **HealthKit**:
 <array>
     <string>health-records</string>
 </array>
+<key>com.apple.developer.healthkit.background-delivery</key>
+<true/>
 ```
 
 **User Script Sandboxing**
@@ -118,6 +120,7 @@ func application(...) -> Bool {
     // ...
     ReactNativeBrownfield.shared.bundle = ReactNativeBundle
     ReactNativeBrownfield.shared.startReactNative()
+    YuvitalLifeHealthKitBackgroundHandler.applicationDidFinishLaunching()
     // ...
 }
 ```
